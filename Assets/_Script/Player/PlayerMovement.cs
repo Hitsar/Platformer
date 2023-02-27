@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        DontDestroyOnLoad(gameObject);
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _playerAnimation = GetComponent<PlayerAnimation>();
     }
@@ -31,21 +32,21 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Ground groun))
-        {
-            _isGround = true;
-            _playerAnimation.OnAir();
-        }
+        _isGround = true;
+        _playerAnimation.OnAir();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out Ground groun))
-        {
-            _isGround = false;
-            _playerAnimation.OnGround();
-        }
+        _isGround = false;
+        _playerAnimation.OnGround();
+    }
+
+    public void Knockback(Vector2 position)
+    {
+        Vector2 knockback = ((Vector2)transform.position - position).normalized * 70;
+        _rigidbody2D.AddForceAtPosition(knockback * _jumpForce, position);
     }
 }

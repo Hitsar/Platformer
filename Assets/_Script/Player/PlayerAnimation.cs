@@ -21,4 +21,9 @@ public class PlayerAnimation : MonoBehaviour
     {
 
     }
+
+    public void OnDie()
+    {
+        gameObject.SetActive(false);
+    }
 }
