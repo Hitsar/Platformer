@@ -3,12 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class LozeMenu : MonoBehaviour
 {
-    private PlayerMovement _player;
-
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        _player = FindObjectOfType<PlayerMovement>().GetComponent<PlayerMovement>();
     }
 
     public void RestartLevel()

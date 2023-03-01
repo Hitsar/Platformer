@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     {
         DontDestroyOnLoad(gameObject);
         _rigidbody2D = GetComponent<Rigidbody2D>();
-        _playerAnimation = GetComponent<PlayerAnimation>();
+        _playerAnimation = GetComponentInChildren<PlayerAnimation>();
     }
 
     private void Update()
@@ -35,18 +35,18 @@ public class PlayerMovement : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         _isGround = true;
-        _playerAnimation.OnAir();
+        _playerAnimation.OnGround();
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         _isGround = false;
-        _playerAnimation.OnGround();
+        _playerAnimation.OnAir();
     }
 
     public void Knockback(Vector2 position)
     {
-        Vector2 knockback = ((Vector2)transform.position - position).normalized * 70;
+        Vector2 knockback = ((Vector2)transform.position - position).normalized * 30;
         _rigidbody2D.AddForceAtPosition(knockback * _jumpForce, position);
     }
 }
