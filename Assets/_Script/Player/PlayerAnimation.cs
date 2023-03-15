@@ -1,11 +1,9 @@
 using DG.Tweening;
-using UnityEditorInternal;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
-
 
     public void TouchBox()
     {
@@ -19,6 +17,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnAir()
     {
+        transform.DOLocalRotate(new Vector3(0, 0, 0), 0);
         transform.DOLocalRotate(new Vector3(0, 0, 90), 0.3f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
     }
 
