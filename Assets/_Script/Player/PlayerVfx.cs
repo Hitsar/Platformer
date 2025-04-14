@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class PlayerAnimation : MonoBehaviour
+public class PlayerVfx : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _playerSpriteRenderer;
 
@@ -17,24 +17,18 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnAir()
     {
-        transform.DOLocalRotate(new Vector3(0, 0, 0), 0);
-        transform.DOLocalRotate(new Vector3(0, 0, 90), 0.3f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
+        transform.DOLocalRotate(Vector3.zero, 0);
+        transform.DOLocalRotate(Vector3.forward * 90, 0.3f).SetEase(Ease.Linear).SetLoops(-1, LoopType.Restart);
     }
 
     public void OnGround()
     {
         Vector3 rotation = transform.eulerAngles;
         rotation.z = Mathf.Round(rotation.z / 90) * 90;
-        transform.DOLocalRotate(rotation, 0.4f).SetEase(Ease.OutCubic);
+        transform.DOLocalRotate(rotation, 0.2f).SetEase(Ease.OutCubic);
     }
 
-    public void OnDamage()
-    {
-        _playerSpriteRenderer.DOColor(Color.red, 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
-        {
-            _playerSpriteRenderer.DOColor(Color.white, 0.3f).SetEase(Ease.OutSine);
-        });
-    }
+    public void OnDamage() => _playerSpriteRenderer.DOColor(Color.red, 0.3f).SetEase(Ease.OutSine).SetLoops(1, LoopType.Incremental);
 
     public void OnDie()
     {
@@ -43,4 +37,6 @@ public class PlayerAnimation : MonoBehaviour
             gameObject.SetActive(false);
         });
     }
+
+    public void Flip(float direction) { if (direction == 0) return; transform.localScale *= direction > 0 ? -1 : 1; }
 }

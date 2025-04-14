@@ -4,7 +4,7 @@ public class BigBox : MonoBehaviour
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerAnimation player))
+        if (collision.gameObject.TryGetComponent(out PlayerVfx player))
         {
             player.TouchBox();
         }
@@ -12,7 +12,7 @@ public class BigBox : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.TryGetComponent(out PlayerAnimation player))
+        if (collision.gameObject.TryGetComponent(out PlayerVfx player))
         {
             player.ExitBox();
         }

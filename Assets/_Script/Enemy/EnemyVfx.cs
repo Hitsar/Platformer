@@ -1,7 +1,7 @@
 using DG.Tweening;
 using UnityEngine;
 
-public class EnemyAnimation : MonoBehaviour
+public class EnemyVfx : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
     public void OnDamage()

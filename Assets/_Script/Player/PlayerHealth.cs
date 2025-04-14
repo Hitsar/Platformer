@@ -4,12 +4,12 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private int _health;
 
-    private PlayerAnimation _playerAnimation;
+    private PlayerVfx _playerVfx;
     private LozeMenu _lozeMenu;
 
     private void Start()
     {
-        _playerAnimation = GetComponentInChildren<PlayerAnimation>();
+        _playerVfx = GetComponentInChildren<PlayerVfx>();
         _lozeMenu = FindObjectOfType<LozeMenu>(true).GetComponent<LozeMenu>();
     }
 
@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
     }
     private void Die()
     {
-        _playerAnimation.OnDie();
+        _playerVfx.OnDie();
         _lozeMenu.gameObject.SetActive(true);
     }
 }

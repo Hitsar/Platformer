@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class EnemyTouch : MonoBehaviour
 {
-    private PlayerAnimation _playerAnimation;
+    private PlayerVfx _playerVfx;
     private PlayerMovement _playerMovement;
     private PlayerHealth _playerHealth;
     private EnemyHealth _enemyHealth;
 
     private void Start()
     {
-        _playerAnimation = FindObjectOfType<PlayerMovement>().GetComponentInChildren<PlayerAnimation>();
+        _playerVfx = FindObjectOfType<PlayerMovement>().GetComponentInChildren<PlayerVfx>();
         _playerMovement = FindObjectOfType<PlayerMovement>().GetComponent<PlayerMovement>();
         _enemyHealth = GetComponent<EnemyHealth>();
     }
@@ -41,6 +41,6 @@ public class EnemyTouch : MonoBehaviour
     {
         _playerHealth.TakeDamage();
         _playerMovement.Knockback(transform.position);
-        _playerAnimation.OnDamage();
+        _playerVfx.OnDamage();
     }
 }

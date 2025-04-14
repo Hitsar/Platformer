@@ -4,17 +4,17 @@ public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int _health;
 
-    private EnemyAnimation _enemyAnimation;
+    private EnemyVfx _enemyVfx;
 
     private void Start()
     {
-        _enemyAnimation = GetComponent<EnemyAnimation>();
+        _enemyVfx = GetComponent<EnemyVfx>();
     }
 
     public void TakeDamage()
     {
         _health--;
-        _enemyAnimation.OnDamage();
+        _enemyVfx.OnDamage();
 
         if (_health <= 0)
         {
@@ -24,6 +24,6 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        _enemyAnimation.OnDie();
+        _enemyVfx.OnDie();
     }
 }
